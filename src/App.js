@@ -1,82 +1,95 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import "antd/dist/antd.css";
-import "./index.css";
-import { Menu, Layout, Space } from "antd";
+import "./App.css";
+import { Menu, Layout, Space, Divider, Button } from "antd";
 import Icon from "@ant-design/icons";
 import { HomePage } from "./components/HomePage";
+import { AboutMe } from "./components/Aboutme/AboutMe";
+import { Project } from "./components/Projects/Project";
+import { SecretPage } from "./components/SecretPage";
+import * as Scroll from "react-scroll";
 import {
-  AppstoreOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
-} from "@ant-design/icons";
+  Link,
+  Element,
+  Events,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll";
+
 function App() {
   const { SubMenu } = Menu;
-
+  let scroll = Scroll.animateScroll;
+  let scrollSpy = Scroll.scrollSpy;
   const { Header, Footer, Content } = Layout;
   const [hover, setHover] = useState(false);
+  const [count, setCount] = useState(0);
   const [hoverStyle, setHoverStyle] = useState({ backgroundColor: "blue" });
+  function addCount() {
+    setCount(count + 1);
+    console.log(count);
+  }
   useEffect(() => {
     if (hover) {
-      setHoverStyle({ backgroundColor: "blue" });
+      setHoverStyle({
+        transform: "translateY(-4em)",
+        transition: "transform 0.6s",
+      });
     } else {
-      setHoverStyle({ backgroundColor: "red" });
+      setHoverStyle({
+        transform: "translateY(0em)",
+        transition: "transform 0.4s",
+      });
     }
   }, [hover]);
   return (
     <Layout style={{ backgroundColor: "#262934" }}>
-      <Header>
-        <Menu mode="horizontal" theme="dark">
-          <Menu.Item
-            key="a"
-            icon={
-              <Icon
-                component={() => (
-                  <img width={40} height={40} src="./icon.png" alt="Icon pic" />
-                )}
-                unselectable="true"
-              />
-            }
+      <Header
+        onMouseEnter={() => {
+          setHover(false);
+        }}
+        onMouseLeave={() => {
+          setHover(true);
+        }}
+        id="hidden"
+      >
+        <Space size={"middle"} id="menu" style={hoverStyle}>
+          <Icon
+            component={() => (
+              <img width={30} height={30} src="./icon.png" alt="Icon pic" />
+            )}
+            style={{
+              marginTop: "-20px",
+              position: "absolute",
+              marginLeft: "3vw",
+            }}
+            onClick={() => {
+              scroll.scrollToTop();
+              addCount();
+            }}
           />
-          <Menu.Item key="1" onMouseEnter={() => setHover(true)}>
-            Option 1
-          </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
-            Option 2
-          </Menu.Item>
-          <Menu.Item key="3" icon={<ContainerOutlined />}>
-            Option 3
-          </Menu.Item>
-          <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub2"
-            icon={<AppstoreOutlined />}
-            title="Navigation Two"
+          <div
+            style={{ marginLeft: "70px" }}
+            className="button"
+            onClick={() => {
+              scroll.scrollTo(574);
+            }}
           >
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <SubMenu key="sub3" title="Submenu">
-              <Menu.Item key="11">Option 11</Menu.Item>
-              <Menu.Item key="12">Option 12</Menu.Item>
-            </SubMenu>
-          </SubMenu>
-        </Menu>
+            About Me
+          </div>
+          <div className="button">Some other</div>
+        </Space>
       </Header>
       <Content style={{ backgroundColor: "#262934" }}>
-        <Space mode="vertical" className="gradient">
-          <HomePage />
-        </Space>
+        <HomePage />
+        <AboutMe bubbleCount={60} />
+        <Project rippleCount={10} />
+        {count >= 10 && <SecretPage />}
       </Content>
-      <Footer style={{ textAlign: "center" }}>
+      <Footer style={{ textAlign: "center", marginTop: "-1.15em" }}>
         <h6>
           This website has been made completely independently as a personal
-          project
+          project by Filippo Zhou.2022©
         </h6>
       </Footer>
     </Layout>

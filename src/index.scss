@@ -7,19 +7,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #262934;
 }
-.ant-menu:hover {
-  color: #963232;
+#menu {
+  height: 4em;
+  background-color: #134148;
+  position: fixed;
+  top: 0;
+  width: 98.9vw;
+  z-index: 3;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 .gradient {
-  background: linear-gradient(-50deg, #241112, #d95a51, #4b1111, #af0c0c);
+  background: linear-gradient(-50deg, #111f23, #31aebc, #134148, #81dfe2);
   background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
-  width: 100%;
-  height: "800px";
+  animation: gradient 10s ease infinite;
+  width: 98.9vw;
+  height: 100vh;
 }
 
 @keyframes gradient {

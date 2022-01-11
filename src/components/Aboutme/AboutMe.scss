@@ -1,0 +1,36 @@
+.bubbles {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #141414;
+}
+
+.text {
+  color: #81dfe2;
+  font-family: Candara;
+  font-size: 60px;
+  margin-left: 10%;
+  margin-top: 6%;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes float-up-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+    transform: translateY(-175vh);
+  }
+}
+@keyframes float-up-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+    transform: translateY(-175vh);
+  }
+}

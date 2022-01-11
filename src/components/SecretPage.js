@@ -1,5 +1,5 @@
 import { Space, Typography } from "antd";
-import "antd/dist/antd.css";
+import "./SecretPage.css";
 const SecretPage = () => {
   return (
     <Space
@@ -20,6 +20,7 @@ const SecretPage = () => {
           fontSize: 60,
           marginTop:"50vh"
         }}
+        id="secret"
       >
         😉💕🐷
       </Typography>

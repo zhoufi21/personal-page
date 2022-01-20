@@ -7,9 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #262934;
 }
+//COLOR!#fbd647
 #menu {
   height: 4em;
-  background-color: #134148;
+  background-color: #594e23;
   position: fixed;
   top: 0;
   width: 98.9vw;
@@ -20,7 +21,7 @@ code {
     monospace;
 }
 .gradient {
-  background: linear-gradient(-50deg, #111f23, #31aebc, #134148, #81dfe2);
+  background: linear-gradient(-50deg, #443b1b, #e8d267, #7c6b2b, #f8f2bd);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
   width: 98.9vw;

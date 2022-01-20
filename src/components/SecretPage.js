@@ -5,7 +5,7 @@ const SecretPage = () => {
     <Space
       direction="vertical"
       style={{
-        backgroundColor: "#b0f1f1",
+        backgroundColor: "#f8f2bd",
         width: "98.9vw",
         height: "100vh",
         position: "relative",
@@ -16,7 +16,7 @@ const SecretPage = () => {
       <Typography
         level={1}
         style={{
-          color: "#001529",
+          color: "#2b2516",
           fontSize: 60,
           marginTop:"50vh"
         }}

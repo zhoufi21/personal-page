@@ -9,10 +9,10 @@ const Circle = ({ size, name, left }) => {
         left: left,
         bottom: `${Math.floor(Math.random() * 90) + 1}vh`,
         animationName: name,
-        animationDelay: `${1 + Math.floor(Math.random() * 10)}s`,
+        animationDelay: `${1 + Math.floor(Math.random() * 20)}s`,
         animationDuration: `${3 + Math.floor(Math.random() * 6)}s`,
         animationTimingFunction: "ease-out",
-        animationIterationCount: "10",
+        animationIterationCount: "infinite",
         animationFillMode: "forwards",
       }}
     ></div>

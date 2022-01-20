@@ -20,7 +20,6 @@ import {
 function App() {
   const { SubMenu } = Menu;
   let scroll = Scroll.animateScroll;
-  let scrollSpy = Scroll.scrollSpy;
   const { Header, Footer, Content } = Layout;
   const [hover, setHover] = useState(false);
   const [count, setCount] = useState(0);
@@ -43,7 +42,7 @@ function App() {
     }
   }, [hover]);
   return (
-    <Layout style={{ backgroundColor: "#262934" }}>
+    <Layout style={{ backgroundColor: "#11111" }}>
       <Header
         onMouseEnter={() => {
           setHover(false);
@@ -68,19 +67,15 @@ function App() {
               addCount();
             }}
           />
-          <div
-            style={{ marginLeft: "70px" }}
-            className="button"
-            onClick={() => {
-              scroll.scrollTo(574);
-            }}
-          >
-            About Me
+          <div style={{ marginLeft: "70px" }} className="button">
+            <Link to="about" spy={false} smooth={true} className="button">
+              About Me
+            </Link>
           </div>
           <div className="button">Some other</div>
         </Space>
       </Header>
-      <Content style={{ backgroundColor: "#262934" }}>
+      <Content style={{ backgroundColor: "#443b1b" }}>
         <HomePage />
         <AboutMe bubbleCount={60} />
         <Project rippleCount={10} />

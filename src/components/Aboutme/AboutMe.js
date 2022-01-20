@@ -1,6 +1,7 @@
 import { Typography, Space } from "antd";
 import "./AboutMe.scss";
 import { Bubble } from "./Bubble";
+import { Element } from "react-scroll";
 const { Title } = Typography;
 const AboutMe = ({ bubbleCount }) => {
   function generateBubble() {
@@ -18,17 +19,17 @@ const AboutMe = ({ bubbleCount }) => {
     return final;
   }
   return (
-    <Space direction="vertical" className="bubbles">
-      <h1 className="text">
+    <Space direction="vertical" className="bubbles" id="about">
+      <h1 className="about">
         <b>About Me</b>
       </h1>
       <Typography
-        className="text"
+        className="about"
         style={{
           fontSize: "25px",
           left: "2%",
           top: "-20%",
-          margin: "8% 15% 4% 10%",
+          margin: "14% 15% 4% 10%",
         }}
         level={3}
       >

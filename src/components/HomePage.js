@@ -7,6 +7,7 @@ const HomePage = () => {
       <Title
         level={1}
         style={{
+          position: "absolute",
           color: "#001529",
           fontFamily: "Candara",
           fontSize: 60,
@@ -19,10 +20,11 @@ const HomePage = () => {
       <Title
         level={3}
         style={{
+          position: "absolute",
           color: "#141414",
           fontFamily: "Helvetica",
           fontSize: 20,
-          marginTop: "-6vh",
+          marginTop: "40vh",
           marginLeft: "25vw",
         }}
       >

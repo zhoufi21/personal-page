@@ -7,8 +7,8 @@
   height: 5em;
   background: linear-gradient(
     180deg,
-    #134148 0%,
-    #134149 50%,
+    #594e23 0%,
+    #594e23 50%,
     transparent 100%
   );
   position: fixed;
@@ -18,11 +18,11 @@
   z-index: 3;
   transition: all 1s linear;
 }
-#hidden{
-    position: fixed;
-    z-index: 5;
-    width: 98.9vw;
-    background: rgba(0,0,0,0.0);
+#hidden {
+  position: fixed;
+  z-index: 5;
+  width: 98.9vw;
+  background: rgba(0, 0, 0, 0);
 }
 .button {
   background: inherit;
@@ -36,11 +36,11 @@
   letter-spacing: 2px;
 }
 .button:hover {
-  color: #b0f1f1;
+  color: #f8f2bd;
   background: linear-gradient(
     180deg,
-    #57c9d1 0%,
-    #57c9d1 50%,
+    #e8d267 0%,
+    #e8d267 50%,
     transparent 100%
   );
 }

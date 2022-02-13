@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+}
+
+#menu {
+  opacity: 1;
+  height: 5em;
+  background: linear-gradient(
+    180deg,
+    #594e23 0%,
+    #594e23 50%,
+    transparent 100%
+  );
+  position: fixed;
+  top: 0;
+  width: 98.9vw;
+  left: 0px;
+  z-index: 3;
+  transition: all 1s linear;
+}
+#hidden {
+  position: fixed;
+  z-index: 5;
+  width: 98.9vw;
+  background: rgba(0, 0, 0, 0);
+}
+.button {
+  background: inherit;
+  height: inherit;
+  margin-top: -5px;
+  width: 10em;
+  text-align: center;
+  font-size: 20px;
+  color: #141414;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.button:hover {
+  color: #f8f2bd;
+  background: linear-gradient(
+    180deg,
+    #e8d267 0%,
+    #e8d267 50%,
+    transparent 100%
+  );
+}

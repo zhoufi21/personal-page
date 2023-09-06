@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import "./App.css";
-import { Menu, Layout, Space, Divider, Button } from "antd";
+import { Menu, Layout, Space} from "antd";
 import Icon from "@ant-design/icons";
 import { HomePage } from "./components/HomePage";
 import { AboutMe } from "./components/Aboutme/AboutMe";
@@ -10,11 +9,7 @@ import { SecretPage } from "./components/SecretPage";
 import * as Scroll from "react-scroll";
 import {
   Link,
-  Element,
-  Events,
   animateScroll as scroll,
-  scrollSpy,
-  scroller,
 } from "react-scroll";
 
 function App() {

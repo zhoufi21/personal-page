@@ -5,7 +5,7 @@ import Icon from "@ant-design/icons";
 import { HomePage } from "./components/HomePage";
 import { AboutMe } from "./components/Aboutme/AboutMe";
 import { Project } from "./components/Projects/Project";
-import { SecretPage } from "./components/SecretPage";
+import { SecretPage } from "./components/SecretPage/SecretPage";
 import * as Scroll from "react-scroll";
 import {
     Link,
@@ -74,7 +74,7 @@ function App() {
                 <HomePage />
                 <AboutMe bubbleCount={60} />
                 <Project rippleCount={10} />
-                {count >= 10 && <SecretPage />}
+                {count >= 3 && <SecretPage />}
             </Content>
             <Footer style={{ textAlign: "center", marginTop: "-1.15em" }}>
                 <h6>

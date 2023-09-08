@@ -17,7 +17,7 @@ const FirstPage = ({ next }) => {
     } else {
       messageApi.open({
         content: "Hint: Read the message",
-        duration: 1,
+        duration: 2,
         type: "error",
       });
     }

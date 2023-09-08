@@ -6,7 +6,7 @@ const { Title } = Typography;
 const Welcome = ({next}) => {
   return (
     <div>
-      <Title>Welcome to the surprise</Title>
+      <Title>Welcome to the surprise🎉</Title>
       <Button onClick={next}>
         Start <PlayCircleOutlined />
       </Button>

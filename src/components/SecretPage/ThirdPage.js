@@ -17,7 +17,7 @@ const ThirdPage = ({ next }) => {
     } else {
       messageApi.open({
         content: "Hint: Combine all the information",
-        duration: 1,
+        duration: 2,
         type: "error",
       });
     }

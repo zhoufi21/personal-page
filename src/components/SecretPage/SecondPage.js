@@ -1,4 +1,4 @@
-import { Typography, Input, Button, message, InputNumber } from "antd";
+import { Typography, Button, message, InputNumber } from "antd";
 import { useState } from "react";
 const { Title } = Typography;
 
@@ -17,7 +17,7 @@ const SecondPage = ({ next }) => {
     } else {
       messageApi.open({
         content: "Hint: 5x5",
-        duration: 1,
+        duration: 2,
         type: "error",
       });
     }

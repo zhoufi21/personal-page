@@ -25,7 +25,7 @@ const SecretPage = () => {
     const date = new Date();
     if (
       date.getMonth() === 8 &&
-      date.getDate() === 8 &&
+      date.getDate() === 11 &&
       date.getFullYear() === 2023
     ) {
       return true;

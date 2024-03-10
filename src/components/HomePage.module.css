@@ -1,0 +1,17 @@
+.title {
+    position: absolute;
+    color: #001529;
+    font-family: Helvetica;
+    font-size: 60px;
+    margin-left: 20vw;
+    margin-top: 30vh;
+}
+
+.year {
+    position: absolute;
+    color: #141414;
+    font-family: Helvetica;
+    font-size: 20px;
+    margin-top: 40vh;
+    margin-left: 25vw;
+}

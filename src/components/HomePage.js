@@ -1,32 +1,21 @@
 import { Space, Typography } from "antd";
 import "antd/dist/antd.css";
+import styles from "./HomePage.module.css";
+import "./HomePage.module.css";
+
 const { Title } = Typography;
 const HomePage = () => {
   return (
     <Space direction="vertical" className="gradient">
       <Title
         level={1}
-        style={{
-          position: "absolute",
-          color: "#001529",
-          fontFamily: "Candara",
-          fontSize: 60,
-          marginLeft: "20vw",
-          marginTop: "30vh",
-        }}
+        className={styles.title}
       >
         Filippo Zhou
       </Title>
       <Title
         level={3}
-        style={{
-          position: "absolute",
-          color: "#141414",
-          fontFamily: "Helvetica",
-          fontSize: 20,
-          marginTop: "40vh",
-          marginLeft: "25vw",
-        }}
+        className={styles.year}
       >
         2022
       </Title>

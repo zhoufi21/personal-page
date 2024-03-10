@@ -2,8 +2,8 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+it('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const footer = screen.getByText("This website has been made completely independently as a personal project by Filippo Zhou.2022©");
+  expect(footer).toBeInTheDocument();
 });

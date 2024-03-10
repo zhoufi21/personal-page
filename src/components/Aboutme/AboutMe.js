@@ -1,7 +1,6 @@
 import { Typography, Space } from "antd";
 import "./AboutMe.scss";
 import { Bubble } from "./Bubble";
-import { Element } from "react-scroll";
 const { Title } = Typography;
 const AboutMe = ({ bubbleCount }) => {
   function generateBubble() {

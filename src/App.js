@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-<<<<<<< HEAD
-import { Menu, Layout, Space} from "antd";
-=======
 import { Menu, Layout, Space } from "antd";
->>>>>>> 4a93596856e7974baab7ff7dba641461127a9751
 import Icon from "@ant-design/icons";
 import { HomePage } from "./components/HomePage";
 import { AboutMe } from "./components/Aboutme/AboutMe";

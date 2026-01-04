@@ -38,7 +38,7 @@ const SecretPage = () => {
           <div>{pages[current]}</div>
       ) : (
         <Typography level={1} className={styles.secret}>
-          😉💕🐷
+          😉💕🐖
         </Typography>
       )}
     </Space>

@@ -1,90 +1,259 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Menu, Layout, Space } from "antd";
-import Icon from "@ant-design/icons";
-import { HomePage } from "./components/HomePage";
-import { AboutMe } from "./components/Aboutme/AboutMe";
-import { Project } from "./components/Projects/Project";
 import { SecretPage } from "./components/SecretPage/SecretPage";
-import * as Scroll from "react-scroll";
-import {
-  Link,
-  animateScroll as scroll,
-} from "react-scroll";
 
 function App() {
-    
-    const { SubMenu } = Menu;
-    let scroll = Scroll.animateScroll;
-    const { Header, Footer, Content } = Layout;
-    const [hover, setHover] = useState(false);
-    const [count, setCount] = useState(0);
-    const [hoverStyle, setHoverStyle] = useState({ backgroundColor: "blue" });
-    function addCount() {
-        setCount(count + 1);
-        console.log(count);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [logoClickCount, setLogoClickCount] = useState(0);
+  const [showSecret, setShowSecret] = useState(false);
+
+  const handleLogoClick = () => {
+    const newCount = logoClickCount + 1;
+    setLogoClickCount(newCount);
+    if (newCount >= 10) {
+      setShowSecret(true);
+    } else {
+      scrollToSection("home");
     }
-    useEffect(() => {
-        if (hover) {
-            setHoverStyle({
-                transform: "translateY(-4em)",
-                transition: "transform 0.6s",
-            });
-        } else {
-            setHoverStyle({
-                transform: "translateY(0em)",
-                transition: "transform 0.4s",
-            });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      
+      // Update active section based on scroll position
+      const sections = ["home", "about", "projects", "contact"];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 150 && rect.bottom >= 150) {
+            setActiveSection(section);
+            break;
+          }
         }
-    }, [hover]);
-    return (
-        <Layout style={{ backgroundColor: "#11111" }}>
-            <Header
-                onMouseEnter={() => {
-                    setHover(false);
-                }}
-                onMouseLeave={() => {
-                    setHover(true);
-                }}
-                id="hidden"
-            >
-                <Space size={"middle"} id="menu" style={hoverStyle}>
-                    <Icon
-                        component={() => (
-                            <img width={30} height={30} src="./icon.png" alt="Icon pic" />
-                        )}
-                        style={{
-                            marginTop: "-20px",
-                            position: "absolute",
-                            marginLeft: "3vw",
-                        }}
-                        onClick={() => {
-                            scroll.scrollToTop();
-                            addCount();
-                        }}
-                    />
-                    <div style={{ marginLeft: "70px" }} className="button">
-                        <Link to="about" spy={false} smooth={true} className="button">
-                            About Me
-                        </Link>
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const projects = [
+    {
+      title: "Personal Portfolio",
+      description: "A modern, responsive personal website built with React featuring smooth animations and clean design.",
+      tags: ["React", "CSS3", "JavaScript"],
+      link: "#",
+      image: null
+    },
+    {
+      title: "AI Agent Startup",
+      description: "AI-driven tools to modernise taxi services, enhance customer experience, and streamline operations.",
+      tags: ["AI", "Machine Learning", "Node.js"],
+      link: "https://www.tazirides.co.uk/",
+      image: "https://static.wixstatic.com/media/7c522c_b167b6b5eb034a5eb2dccf0c07313eb6~mv2.png/v1/crop/x_74,y_595,w_3947,h_1078/fill/w_274,h_77,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Extended%20Rides%20GoogleBrand.png"
+    },
+    {
+      title: "Capital One",
+      description: "Developed internal tools to improve customer support and operational efficiency",
+      tags: ["Java", "Spring Boot", "AWS"],
+      link: "https://www.capitalone.co.uk/creditcards/credit-card-eligibility-checker",
+      image: `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 48' aria-labelledby='capitalOneLogo' role='img'%3E%3Ctitle id='capitalOneLogo'%3ECapital One logo%3C/title%3E%3Cpath d='M91.94,34.72h0c-5.77,4-12.6,8.27-20,12.71l-.29.17a.21.21,0,0,0-.06.3.22.22,0,0,0,.31.05l.24-.13c6.24-3.21,13.4-7,20.6-10.93l.12-.07A8.6,8.6,0,0,1,91.94,34.72ZM129.8,4.46c-9.1-9.9-67.6-1-92.48,4.37L36.74,9a.22.22,0,0,0-.18.25.22.22,0,0,0,.26.17l.57-.11C58,5.65,100.87.63,110.09,9.66c2.82,2.75,2.15,6.3-1.12,10.49a8.28,8.28,0,0,1,3.58,5.06C125.29,16.85,133.85,8.87,129.8,4.46Z' fill='%23004977'/%3E%3Cpath d='M95.62,32.12c.11,3.48,2.35,6.33,5.26,6.33,5.64,0,8-6.84,7.88-11.41-.12-3.49-2.41-6.34-5.32-6.34C98.58,20.7,95.45,27.52,95.62,32.12Zm-3-.19c-.21-5.94,4.5-12,11.36-12,4.58,0,7.58,3,7.75,7.63.22,6.27-4.19,12-11.36,12C95.8,39.56,92.8,36.56,92.64,31.93Z' fill='%23004977'/%3E%3Cpath d='M27.72,30.36a6.68,6.68,0,0,1-1,.26c-.39.09-1.1.22-2.14.38a3.66,3.66,0,0,0-1.49.46,1.09,1.09,0,0,0-.48.72.69.69,0,0,0,.32.74,2.48,2.48,0,0,0,1.38.29A4.59,4.59,0,0,0,25.77,33a3.27,3.27,0,0,0,1.16-.61,1.76,1.76,0,0,0,.5-.72A9.56,9.56,0,0,0,27.72,30.36Zm6-3.66a14.49,14.49,0,0,1-.26,1.86l-1,5.59A1,1,0,0,0,33,35.3l0,.22H27.16l-.05-1.42a11.58,11.58,0,0,1-2.77,1.17,10.37,10.37,0,0,1-2.77.33c-1.86,0-2.93-.19-3.67-.83a2.24,2.24,0,0,1-1.07-2,3,3,0,0,1,.7-1.66,4.08,4.08,0,0,1,1.53-1.06,8.42,8.42,0,0,1,2.32-.64c1-.17,2.44-.33,4.34-.49a6.47,6.47,0,0,0,1.9-.42c.4-.15.55-.32.61-.64.11-.58-.08-.9-.85-1.05-2.08-.41-6,.26-8,.75l1.09-2.9A52.22,52.22,0,0,1,28.23,24C32.39,24,33.72,25.2,33.67,26.7Z' fill='%23004977'/%3E%3Cpath d='M50.4,35.52l2-11.16h5.52l-2,11.16Zm2.31-13.75c.17-.91,1.63-1.66,3.27-1.66s2.84.75,2.68,1.66S57,23.44,55.38,23.44,52.54,22.69,52.71,21.77Z' fill='%23004977'/%3E%3Cpath d='M77.55,30.39c-.24.08-.56.17-1,.26s-1.11.2-2.15.37a3.66,3.66,0,0,0-1.49.46,1.17,1.17,0,0,0-.48.72.69.69,0,0,0,.32.74,2.56,2.56,0,0,0,1.39.28A4.93,4.93,0,0,0,75.61,33a3.62,3.62,0,0,0,1.16-.61,1.9,1.9,0,0,0,.5-.73A9.45,9.45,0,0,0,77.55,30.39Zm6-3.67a13.15,13.15,0,0,1-.27,1.86l-1,5.59a1,1,0,0,0,.56,1.16l0,.19H77l0-1.42a11.75,11.75,0,0,1-2.77,1.17,10,10,0,0,1-2.78.33c-1.86,0-2.92-.18-3.66-.82s-1.12-1.1-1.08-2a3,3,0,0,1,.7-1.66,4.33,4.33,0,0,1,1.54-1.06,9.18,9.18,0,0,1,2.31-.65c1-.15,2.45-.32,4.35-.48a6.57,6.57,0,0,0,1.89-.41c.4-.16.56-.33.62-.65.1-.56-.08-.9-.85-1.05-2.09-.41-6,.26-8,.75l1.08-2.9a53.74,53.74,0,0,1,7.75-.63C82.22,24.05,83.54,25.23,83.51,26.72Z' fill='%23004977'/%3E%3Cpath d='M16.07,31.51a20.58,20.58,0,0,1-4.59.48c-2.64,0-4.73-1.29-4.62-3.66.08-1.58,2-4.92,6.79-4.92A8,8,0,0,1,18,24.58l.7-3.88a13.42,13.42,0,0,0-5.47-.91C6.87,19.86.81,22.69.06,28.45s6.47,7.33,9.69,7.32c1.86,0,3.79-.08,5.59-.27Z' fill='%23004977'/%3E%3Cpath d='M61,24.29,61.37,22l5.78-1.24-.61,3.51h2.83l-.54,2.25H66.08l-1.66,9s-5.57,0-5.59,0l1.66-8.95h-2.1l.43-2.27Z' fill='%23004977'/%3E%3Cpolygon points='89.12 35.51 83.49 35.52 86.32 19.95 91.81 20.1 89.12 35.51' fill='%23004977'/%3E%3Cpath d='M43.09,27a3.23,3.23,0,0,0-2,.65A2.92,2.92,0,0,0,40,29.53a2.42,2.42,0,0,0,.32,2.11,2.19,2.19,0,0,0,1.71.64,3.27,3.27,0,0,0,1.4-.27,2.78,2.78,0,0,0,1.08-.92,3.51,3.51,0,0,0,.61-1.47,2.17,2.17,0,0,0-.39-2A2.13,2.13,0,0,0,43.09,27ZM33,39.37l2.69-15h4.85l-.37,1.91a4.66,4.66,0,0,1,2-1.42,8.34,8.34,0,0,1,3.14-.66,5.81,5.81,0,0,1,3,.56,4,4,0,0,1,2,2.11,5.5,5.5,0,0,1,.24,3,6.6,6.6,0,0,1-2.73,4.37,7.27,7.27,0,0,1-4.72,1.35,7.38,7.38,0,0,1-1.7-.18,3.69,3.69,0,0,1-1.1-.44,4.67,4.67,0,0,1-.91-.81l-.91,5.13Z' fill='%23004977'/%3E%3Cpath d='M133.35,28.34a1.36,1.36,0,0,0-1.43-1.5c-2.27,0-4.68,4.38-5.09,6.15C130.54,33,133.44,30.8,133.35,28.34Zm.48,6.87.44.3a6.93,6.93,0,0,1-6,4,3.91,3.91,0,0,1-4-4.09c-.17-4.79,4.36-9.23,8.08-9.23,1.6,0,3.07.69,3.14,2.38.14,3.81-5.27,5-8.84,5.05a4.37,4.37,0,0,0-.14,1.4,2.83,2.83,0,0,0,3,2.91A5.71,5.71,0,0,0,133.83,35.21Z' fill='%23004977'/%3E%3Cpath d='M111.67,28.22c.38,0,1-.12,1.26-.12s.79.08.81.47c0,.24-.42,1.93-.51,2.33l-.86,3.75c-.35,1.53-.73,3.14-1.06,4.41h2.21l1.25-5.94c3.79-3.91,5.25-5.18,6.15-5.18a.64.64,0,0,1,.7.69,11.81,11.81,0,0,1-.56,2.69l-1.27,4.34a8.8,8.8,0,0,0-.48,2.48,1.32,1.32,0,0,0,1.49,1.37c1.61,0,2.79-1.66,3.82-3.3l-.3-.54c-.42.66-1.38,2.1-2.14,2.1-.24,0-.46-.16-.47-.56a6.45,6.45,0,0,1,.34-1.76l1.41-5.08a12.28,12.28,0,0,0,.55-2.78,1.3,1.3,0,0,0-1.45-1.39c-1.46,0-3.39,1.05-7.49,5.7H115l.52-2.27c.28-1.24.55-2.54.82-3.43a38.73,38.73,0,0,1-4.7,1.31Z' fill='%23004977'/%3E%3Cpath d='M139.43,26.37a2,2,0,0,1-2.74,0,1.9,1.9,0,0,1,0-2.71,2,2,0,0,1,2.74,0A1.81,1.81,0,0,1,140,25,1.85,1.85,0,0,1,139.43,26.37Zm-2.55-2.52a1.6,1.6,0,0,0-.49,1.16,1.64,1.64,0,0,0,.49,1.18,1.69,1.69,0,0,0,2.36,0,1.64,1.64,0,0,0,.49-1.18,1.6,1.6,0,0,0-.49-1.16,1.69,1.69,0,0,0-2.36,0ZM138,24a1.64,1.64,0,0,1,.58.07.52.52,0,0,1,.33.53.46.46,0,0,1-.21.42.7.7,0,0,1-.3.1.53.53,0,0,1,.36.21.56.56,0,0,1,.12.32v.31a.54.54,0,0,0,0,.11l0,0h-.36v-.28a.5.5,0,0,0-.21-.48.79.79,0,0,0-.41-.07h-.3v.83h-.37V24Zm.41.33a1.05,1.05,0,0,0-.46-.08h-.32V25H138a1.06,1.06,0,0,0,.36,0,.32.32,0,0,0,.22-.32A.32.32,0,0,0,138.43,24.29Z' fill='%23004977'/%3E%3C/svg%3E`
+    }
+  ];
+
+  const skills = [
+    "React",
+    "JavaScript",
+    "TypeScript",
+    "CSS/SCSS",
+    "Node.js",
+    "Python",
+    "3D Modeling",
+    "AI/ML",
+    "Java",
+    "AWS",
+    "Salesforce",
+    "Jest/Cypress",
+    "Swift",
+    "Kotlin",
+  ];
+
+  return (
+    <div className="app">
+      {/* Navigation */}
+      <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
+        <div className="nav-container">
+          <div className="logo" onClick={handleLogoClick}>
+            <span className="logo-text">FZ</span>
+          </div>
+          <ul className="nav-links">
+            {["home", "about", "projects", "contact"].map((item) => (
+              <li key={item}>
+                <button
+                  className={`nav-link ${activeSection === item ? "active" : ""}`}
+                  onClick={() => scrollToSection(item)}
+                >
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="hero">
+        <div className="hero-background">
+          <div className="gradient-orb orb-1"></div>
+          <div className="gradient-orb orb-2"></div>
+          <div className="gradient-orb orb-3"></div>
+        </div>
+        <div className="hero-content">
+          <p className="hero-greeting">Hello, I'm</p>
+          <h1 className="hero-name">Filippo Zhou</h1>
+          <p className="hero-tagline">
+            Curious Software Engineer
+          </p>
+          <p className="hero-description">
+            Passionate about building elegant solutions that blend
+            creativity with cutting-edge technology.
+          </p>
+          <div className="hero-cta">
+            <button className="btn btn-primary" onClick={() => scrollToSection("projects")}>
+              View My Work
+            </button>
+            <button className="btn btn-secondary" onClick={() => scrollToSection("contact")}>
+              Get In Touch
+            </button>
+          </div>
+        </div>
+        <div className="scroll-indicator" onClick={() => scrollToSection("about")}>
+          <span className="scroll-text">Scroll</span>
+          <div className="scroll-line"></div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="about">
+        <div className="section-container">
+          <div className="section-header">
+            <span className="section-tag">About Me</span>
+            <h2 className="section-title">Curious Mind, Creative Soul</h2>
+          </div>
+          <div className="about-content">
+            <div className="about-text">
+              <p>
+                I'm a software engineer with an insatiable curiosity for learning
+                new things. From building websites to learning braille,
+                to 3D modeling — I'm always exploring what's possible.
+              </p>
+              <p>
+                When I'm not coding, you'll find me diving into new hobbies or
+                experimenting with creative projects. I believe the best work comes
+                from combining technical skills with genuine passion and curiosity.
+              </p>
+            </div>
+            <div className="skills-container">
+              <h3 className="skills-title">Skills & Expertise</h3>
+              <div className="skills-list">
+                {skills.map((skill, index) => (
+                  <span key={index} className="skill-tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="projects">
+        <div className="section-container">
+          <div className="section-header">
+            <span className="section-tag">Portfolio</span>
+            <h2 className="section-title">Featured Projects</h2>
+          </div>
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <article key={index} className="project-card">
+                <div className="project-image">
+                  {project.image ? (
+                    <img src={project.image} alt={project.title} className="project-img" />
+                  ) : (
+                    <div className="project-placeholder">
+                      <span>{project.title.charAt(0)}</span>
                     </div>
-                    <div className="button">Some other</div>
-                </Space>
-            </Header>
-            <Content style={{ backgroundColor: "#443b1b" }}>
-                <HomePage />
-                <AboutMe bubbleCount={60} />
-                <Project rippleCount={10} />
-                {count >= 3 && <SecretPage />}
-            </Content>
-            <Footer style={{ textAlign: "center", marginTop: "-1.15em" }}>
-                <h6>
-                    This website has been made completely independently as a personal
-                    project by Filippo Zhou.2022©
-                </h6>
-            </Footer>
-        </Layout>
-    );
+                  )}
+                </div>
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+                  <div className="project-tags">
+                    {project.tags.map((tag, i) => (
+                      <span key={i} className="tag">{tag}</span>
+                    ))}
+                  </div>
+                  <a href={project.link} className="project-link">
+                    View Project <span className="arrow">→</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="contact">
+        <div className="section-container">
+          <div className="section-header">
+            <span className="section-tag">Contact</span>
+            <h2 className="section-title">Let's Work Together</h2>
+          </div>
+          <div className="contact-content">
+            <p className="contact-description">
+              Have an interesting project in mind or just want to say hello?
+              I'd love to hear from you!
+            </p>
+            <a href="mailto:zhoufi21@gmail.com" className="contact-email">
+              zhoufi21@gmail.com
+            </a>
+            <div className="social-links">
+              <a href="https://www.linkedin.com/in/filippo-zhou/" className="social-link" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer-container">
+          <p>Designed & Built by Filippo Zhou © {new Date().getFullYear()}</p>
+        </div>
+      </footer>
+
+      {/* Secret Page Modal */}
+      {showSecret && (
+        <div className="secret-overlay">
+          <button className="secret-close" onClick={() => { setShowSecret(false); setLogoClickCount(0); }}>
+            ✕
+          </button>
+          <SecretPage />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;
